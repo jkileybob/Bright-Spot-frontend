@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-// import Map from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/map/Map.js'
+import CurrentLocation from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/map/Map.js'
 
 
 export class MapContainer extends Component {
-
   state = {
    showingInfoWindow: false,  //Hides or the shows the infoWindow
    activeMarker: {},          //Shows the active marker upon click
@@ -35,34 +34,28 @@ export class MapContainer extends Component {
 
   render(){
 
+
     if (!this.props.loaded) {
       return <div>Loading BrightSpot...</div>
     }
-    return(
-      <Map
-        google={this.props.google}
-        zoom={14}
-        initialCenter={{
-         lat: 38.919103899999996,
-         lng: -77.0305492
-       }} >
-        <Marker
-          onClick={this.onMarkerClick}
-          name={'Home Sweet Home'}
-        />
+    return (
+      <CurrentLocation centerAroundCurrentLocation google={this.props.google}>
+        <Marker onClick={this.onMarkerClick} name={'current location'} />
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
-          onClose={this.onClose}        >
+          onClose={this.onClose}
+        >
           <div>
             <h4>{this.state.selectedPlace.name}</h4>
           </div>
         </InfoWindow>
-      </Map>
-  )}
+      </CurrentLocation>
+    );
+}
 }
 
 export default GoogleApiWrapper(
   (props)=>({
-    apiKey: ("nice try")
+    apiKey: (process.env.REACT_APP_GOOGLE_MAPS_API_KEY)
 }))(MapContainer)
