@@ -1,0 +1,8 @@
+export default
+map {
+  position: 'absolute';
+  width: '50%';
+  height: '50%';
+  left: '25%';
+  top: '25%';
+}

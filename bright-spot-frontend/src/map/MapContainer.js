@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import CurrentLocation from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/map/Map.js'
+import SearchLocation from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/map/SearchLocation.js'
 
 
 export class MapContainer extends Component {
@@ -32,6 +33,19 @@ export class MapContainer extends Component {
   };
 
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state.addressInput);
+
+  }
+
+  onChangeHandler = (e) => {
+    // console.log(e.target.value);
+    this.setState({
+      addressInput: e.target.value
+    })
+  }
+
   render(){
 
 
@@ -39,6 +53,11 @@ export class MapContainer extends Component {
       return <div>Loading BrightSpot...</div>
     }
     return (
+    <React.Fragment>
+      <SearchLocation
+        onSubmit={this.handleSubmit}
+        onChange={this.onChangeHandler}
+        />
       <CurrentLocation centerAroundCurrentLocation google={this.props.google}>
         <Marker onClick={this.onMarkerClick} name={'current location'} />
         <InfoWindow
@@ -51,6 +70,7 @@ export class MapContainer extends Component {
           </div>
         </InfoWindow>
       </CurrentLocation>
+    </React.Fragment>
     );
 }
 }
