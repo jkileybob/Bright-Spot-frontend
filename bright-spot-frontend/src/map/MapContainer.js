@@ -53,7 +53,7 @@ export class MapContainer extends Component {
       return <div>Loading BrightSpot...</div>
     }
     return (
-    <React.Fragment className="MapContainer">
+    <React.Fragment key="map-container">
       <SearchLocation
         onSubmit={this.handleSubmit}
         onChange={this.onChangeHandler}

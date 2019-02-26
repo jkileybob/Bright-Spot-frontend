@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import NavBar from '../src/NavBar'
 import MapContainer from '../src/map/MapContainer'
 import BrightSpotContainer from '../src/BrightSpot/BrightSpotContainer'
+import PostContainer from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/Posts/PostContainer.js'
 
 
 class App extends Component {
 
   state = {
-    brightSpotMarkers: [],
-    allPosts: []
+    brightSpots: [],
+    posts: []
   }
 
   componentDidMount(){
@@ -17,26 +18,44 @@ class App extends Component {
     .then(brightSpots => {
       // console.log(brightSpots)
       this.setState({
-        brightSpotMarkers: brightSpots
+        brightSpots: brightSpots
       })
     })
     fetch('http://localhost:3001/api/v1/posts')
     .then(response => response.json())
     .then(posts => {
-      console.log(posts)
+      // console.log(posts)
       this.setState({
-        allPosts: posts
+        posts: posts
       })
     })
   }
 
+  // getPosts(){
+  //   fetch('http://localhost:3001/api/v1/posts')
+  //   .then(response => response.json())
+  //   .then(posts => {
+  //     console.log(posts)
+  //     this.setState({
+  //       posts: posts
+  //     })
+  //   })
+  // }
+
   render() {
     return(
-
       <div className='App'>
         <NavBar />
-        <MapContainer />
-        <BrightSpotContainer />
+        <MapContainer
+          brightSpots={this.state.brightSpots}
+          />
+        <BrightSpotContainer
+          brightSpots={this.state.brightSpots}
+           />
+        <PostContainer
+          post={this.state.posts}
+          brightSpots={this.state.brightSpots}
+           />
       </div>
 
   )}
