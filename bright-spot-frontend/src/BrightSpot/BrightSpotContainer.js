@@ -3,7 +3,7 @@ import BrightSpot from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-fronten
 export class BrightSpotContainer extends React.Component {
   render(){
     return (
-      <div>
+      <div className='BrightSpotContainer'>
         <BrightSpot />
       </div>
     )

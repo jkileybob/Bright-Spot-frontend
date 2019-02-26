@@ -3,7 +3,9 @@ import React from 'react'
 export class BrightSpot extends React.Component {
   render(){
     return(
-      <div><h1>BRIGHT SPOT</h1></div>
+      <div className="BrightSpot">
+        <h1>BRIGHT SPOT</h1>
+      </div>
     )
   }
 }

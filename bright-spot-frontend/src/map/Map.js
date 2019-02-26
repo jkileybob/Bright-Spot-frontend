@@ -106,7 +106,7 @@ renderChildren() {
     const style = Object.assign({}, mapStyles.map);
 
     return (
-      <div>
+      <div className="map">
         <div style={style} ref="map">
           Loading map...
         </div>
