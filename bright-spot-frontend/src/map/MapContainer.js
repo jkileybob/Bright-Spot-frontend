@@ -8,7 +8,8 @@ export class MapContainer extends Component {
   state = {
    showingInfoWindow: false,  //Hides or the shows the infoWindow
    activeMarker: {},          //Shows the active marker upon click
-   selectedPlace: {}          //Shows the infoWindow to the selected place upon a marker
+   selectedPlace: {},         //Shows the infoWindow to the selected place upon a marker
+   addressInput: ''           //SearchBar
   };
 
   onMarkerClick = (props, marker, e) => {

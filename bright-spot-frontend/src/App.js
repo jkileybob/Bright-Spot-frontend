@@ -9,7 +9,8 @@ class App extends Component {
 
   state = {
     brightSpots: [],
-    posts: []
+    posts: [],
+    currentPost: null
   }
 
   componentDidMount(){
@@ -33,7 +34,10 @@ class App extends Component {
 
 
   onPostClickHandler = (e) => {
-    console.log(e)
+    // console.log(e.currentTarget.id);
+    this.setState({
+      currentPost: e.currentTarget.id
+    })
   }
 
   render() {
@@ -47,7 +51,11 @@ class App extends Component {
           brightSpots={this.state.brightSpots}
           posts={this.state.posts}
           onClick={this.onPostClickHandler}
+          currentPost={this.state.currentPost}
            />
+         <BrightSpotContainer
+           currentPost={this.props.currentPost}
+           /> 
       </div>
 
   )}

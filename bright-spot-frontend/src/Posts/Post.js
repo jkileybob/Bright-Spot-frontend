@@ -8,17 +8,24 @@ export class Post extends React.Component {
     // console.log(this.props.post.bright_spot_id)
   return(
     <div className='post'>
-      {this.props.brightSpot.map(spot =>{
-        if (spot.id === this.props.post.bright_spot_id){
-          return <h1>{spot.name}</h1>
-          }
-        }
-      )}
-    <img
-        class='img'
+      <img
+        className='img'
+        key={`post-img-${this.props.post.id}`}
+        id={this.props.post.id}
         src={this.props.post.photo}
         onClick={this.props.onClick}
         />
+      {this.props.brightSpot.map(spot =>{
+        // console.log(spot.description)
+        if (spot.id === this.props.post.bright_spot_id){
+          return (
+            <div class='post'>
+              <h1 key={`post-name-header-${spot.id}`}>{spot.name}</h1>
+              <h3 key={`post-description-${spot.id}`}>{spot.decription}</h3>
+            </div>
+          )}
+        }
+      )}
     </div>
   )}
 }
