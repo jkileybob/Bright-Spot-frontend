@@ -31,16 +31,10 @@ class App extends Component {
     })
   }
 
-  // getPosts(){
-  //   fetch('http://localhost:3001/api/v1/posts')
-  //   .then(response => response.json())
-  //   .then(posts => {
-  //     console.log(posts)
-  //     this.setState({
-  //       posts: posts
-  //     })
-  //   })
-  // }
+
+  onPostClickHandler = (e) => {
+    console.log(e)
+  }
 
   render() {
     return(
@@ -49,12 +43,10 @@ class App extends Component {
         <MapContainer
           brightSpots={this.state.brightSpots}
           />
-        <BrightSpotContainer
-          brightSpots={this.state.brightSpots}
-           />
         <PostContainer
-          post={this.state.posts}
           brightSpots={this.state.brightSpots}
+          posts={this.state.posts}
+          onClick={this.onPostClickHandler}
            />
       </div>
 

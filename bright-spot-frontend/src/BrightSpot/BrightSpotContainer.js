@@ -6,11 +6,22 @@ export class BrightSpotContainer extends React.Component {
   render(){
     return (
       <div className='BrightSpotContainer'>
-
-        <BrightSpot />
       </div>
     )
   }
 }
 
 export default BrightSpotContainer
+
+
+
+// {this.props.brightSpots.map(spot =>
+//   <BrightSpot
+//     key={spot.name}
+//     id={spot.id}
+//     brightSpots={spot}
+//     posts={this.props.posts}
+//     onSpotClick={this.props.onSpotClick}
+//     />
+//
+// )}
