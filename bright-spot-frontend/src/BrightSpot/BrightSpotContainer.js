@@ -5,19 +5,14 @@ export class BrightSpotContainer extends React.Component {
 
   render(){
     return (
+      this.props.currentPost ?
       <div className='BrightSpotContainer'>
-        
-        {this.props.brightSpots.map(spot =>{
-          if (spot.id === this.props.currentPost){
-            return (
-              <BrightSpot
-                key={`bright-spot-${spot.id}`}
-                spot={spot}
-                />
-            )}
-          }
-       )}
+            <BrightSpot
+              key={`bright-spot-${this.props.currentPost.id}`}
+              spot={this.props.currentPost}
+              />
       </div>
+      : null
     )
   }
 }

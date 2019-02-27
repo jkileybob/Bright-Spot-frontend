@@ -57,6 +57,9 @@ class App extends Component {
           onClick={this.onPostClickHandler}
           currentPost={this.state.currentPost}
            />
+         <BrightSpotContainer
+          currentPost={this.state.currentPost} 
+           />
       </div>
 
   )}

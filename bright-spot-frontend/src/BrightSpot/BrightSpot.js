@@ -5,7 +5,7 @@ const BrightSpot = (props) => {
     return(
       <div className="bright-spot">
         <h1 key={`bright-spot-name-header-${props.spot.id}`}>{props.spot.name}</h1>
-        <h3 key={`bright-spot-description-${props.spot.id}`}>{props.spot.decription}</h3>
+        <h3 key={`bright-spot-description-${props.spot.id}`}>{props.spot.description}</h3>
       </div>
   )
 }
