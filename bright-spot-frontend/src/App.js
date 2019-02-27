@@ -111,14 +111,12 @@ class App extends Component {
           /> ) } }
       />
 
-
       <Route exact path='/brightSpots' render={()=>{
           return(
             <BrightSpotContainer
              currentPost={this.state.currentPost}
             /> ) } }
       />
-
 
       <Route exact path='/new-post' render={()=>{
           return(

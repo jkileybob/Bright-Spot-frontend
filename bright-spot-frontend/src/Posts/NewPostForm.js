@@ -5,7 +5,7 @@ const NewPostForm = (props) => {
   return(
     <div>
       <h1>Add a Bright Spot!</h1>
-      // map will eventually go here
+      <MapContainer />
       <form>
         <input id='input-name'
           type='text'
