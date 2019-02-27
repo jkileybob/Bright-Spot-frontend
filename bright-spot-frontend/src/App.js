@@ -4,11 +4,12 @@ import NavBar from '../src/NavBar'
 import MapContainer from '../src/map/MapContainer'
 import BrightSpotContainer from '../src/BrightSpot/BrightSpotContainer'
 import PostContainer from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/Posts/PostContainer.js'
+import Post from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/Posts/Post.js'
 import NewPostForm from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/Posts/NewPostForm.js'
 
 class App extends Component {
 
-// STATE:
+  // STATE:
   state = {
     brightSpots: [],      //all spots
     posts: [],            //all posts
@@ -19,7 +20,7 @@ class App extends Component {
   }
 
 
-// FETCH:
+  // FETCH:
   componentDidMount(){
     fetch('http://localhost:3001/api/v1/bright_spots')
     .then(response => response.json())
@@ -47,7 +48,7 @@ class App extends Component {
     })
   }
 
-// FORM STUFF:
+  // FORM STUFF:
   onClickNewHandler = (e) => {
     console.log(e)
   }
@@ -77,7 +78,7 @@ class App extends Component {
   //   // fetch() post to  backend
   // }
 
-  //will fecth post data to backend
+  //will fetch post data to backend
   submitPostFormHandler = (e) => {
     e.preventDefault();
     const fileData = new FormData();
@@ -98,27 +99,48 @@ class App extends Component {
           return (
             <MapContainer
               brightSpots={this.state.brightSpots}
-            />  ) } }
+            />
+          ) } }
         />
 
-      <Route exact path='/posts' render={()=>{
+      <Route exact path='/home' render={()=>{
           return (
             <PostContainer
-            brightSpots={this.state.brightSpots}
-            posts={this.state.posts}
-            onClick={this.onPostClickHandler}
-            currentPost={this.state.currentPost}
-          /> ) } }
-      />
+              brightSpots={this.state.brightSpots}
+              posts={this.state.posts}
+              onClick={this.onPostClickHandler}
+              currentPost={this.state.currentPost}
+            />
+          ) } }
+        />
 
-      <Route exact path='/brightSpots' render={()=>{
+        <Route exact path='/post/:id' render={(props)=>{
+          // debugger
+          let postIDinURL = props.match.params.id
+          let post = this.state.posts.find(post => post.id === postIDinURL)
+
+          return(
+            <Post
+              id={`post-${this.state.currentPost.id}`}
+              key={`post-${this.state.currentPost.id}`}
+              post={this.state.posts}
+              brightSpot={this.state.brightSpots}
+              currentPost={this.state.currentPost}
+              onClick={this.onPostClickHandler}
+            />
+            ) } }
+        />
+
+        <Route exact path='/bright-spots' render={()=>{
           return(
             <BrightSpotContainer
              currentPost={this.state.currentPost}
-            /> ) } }
-      />
+            />
+          ) } }
+        />
 
-      <Route exact path='/new-post' render={()=>{
+
+        <Route exact path='/new-post' render={()=>{
           return(
             <NewPostForm
              fileSelect={this.fileSelectHandler}
@@ -126,11 +148,11 @@ class App extends Component {
              submitPostForm={this.submitPostFormHandler}
              inputName={this.nameHandler}
              inputDescription={this.descriptionHandler}
-             /> ) } }
-      />
+            />
+          ) } }
+        />
 
       </div>
-
   )}
 }
 
