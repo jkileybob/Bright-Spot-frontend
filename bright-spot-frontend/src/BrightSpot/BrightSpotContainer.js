@@ -13,8 +13,7 @@ export class BrightSpotContainer extends React.Component {
               />
       </div>
       : null
-    )
-  }
+    )}
 }
 
 export default BrightSpotContainer

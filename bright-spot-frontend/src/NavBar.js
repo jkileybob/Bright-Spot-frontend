@@ -5,11 +5,8 @@ const NavBar = (props) => {
   return(
   <div className="NavBar">
     <Menu icon>
-      <Menu.Item name= 'map'>
-      <Icon name='map'/>
-      </Menu.Item>
+          <button onClick={props.onClick}>Post a BrightSpot!</button>
           <h1>NavBar</h1>
-
   </Menu>
 </div>
   )
