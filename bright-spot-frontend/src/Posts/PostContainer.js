@@ -8,9 +8,6 @@ export class PostContainer extends React.Component{
 
 
   render(){
-    // console.log(this.props)
-    // console.log(this.props.posts.map(post => console.log(post)))
-
     return(
       <div>
         <React.Fragment>

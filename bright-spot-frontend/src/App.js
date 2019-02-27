@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Route} from 'react-router-dom'
 import NavBar from '../src/NavBar'
 import MapContainer from '../src/map/MapContainer'
 import BrightSpotContainer from '../src/BrightSpot/BrightSpotContainer'
@@ -92,26 +93,44 @@ class App extends Component {
           posts={this.state.posts}
           onClick={this.onClickNewHandler}
           />
-        <MapContainer
-          brightSpots={this.state.brightSpots}
-          />
 
-        <PostContainer
-          brightSpots={this.state.brightSpots}
-          posts={this.state.posts}
-          onClick={this.onPostClickHandler}
-          currentPost={this.state.currentPost}
-           />
-         <BrightSpotContainer
-          currentPost={this.state.currentPost}
-           />
-         <NewPostForm
-          fileSelect={this.fileSelectHandler}
-          fileUpload={this.fileUploadHandler}
-          submitPostForm={this.submitPostFormHandler}
-          inputName={this.nameHandler}
-          inputDescription={this.descriptionHandler}
-          />
+        <Route exact={true} path='/map' render={()=>{
+          return (
+            <MapContainer
+              brightSpots={this.state.brightSpots}
+            />  ) } }
+        />
+
+      <Route exact path='/posts' render={()=>{
+          return (
+            <PostContainer
+            brightSpots={this.state.brightSpots}
+            posts={this.state.posts}
+            onClick={this.onPostClickHandler}
+            currentPost={this.state.currentPost}
+          /> ) } }
+      />
+
+
+      <Route exact path='/brightSpots' render={()=>{
+          return(
+            <BrightSpotContainer
+             currentPost={this.state.currentPost}
+            /> ) } }
+      />
+
+
+      <Route exact path='/new-post' render={()=>{
+          return(
+            <NewPostForm
+             fileSelect={this.fileSelectHandler}
+             fileUpload={this.fileUploadHandler}
+             submitPostForm={this.submitPostFormHandler}
+             inputName={this.nameHandler}
+             inputDescription={this.descriptionHandler}
+             /> ) } }
+      />
+
       </div>
 
   )}
