@@ -16,8 +16,8 @@ export class PostContainer extends React.Component{
         <React.Fragment>
           {this.props.posts.map((post) => {
             return (<Post
-                id={post.id}
-                key={post.id}
+                id={`post-${post.id}`}
+                key={`post-${post.id}`}
                 post={post}
                 brightSpot={this.props.brightSpots}
                 onClick={this.props.onClick}
@@ -30,11 +30,3 @@ export class PostContainer extends React.Component{
 }
 
 export default PostContainer
-
-
-
-
-
-// <React.Fragment>
-//   <img src={this.props.posts.photo} onPostClick={this.props.onPostClick}/>
-// </React.Fragment>

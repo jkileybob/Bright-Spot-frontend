@@ -17,7 +17,6 @@ class App extends Component {
     fetch('http://localhost:3001/api/v1/bright_spots')
     .then(response => response.json())
     .then(brightSpots => {
-      // console.log(brightSpots)
       this.setState({
         brightSpots: brightSpots
       })
@@ -25,40 +24,53 @@ class App extends Component {
     fetch('http://localhost:3001/api/v1/posts')
     .then(response => response.json())
     .then(posts => {
-      // console.log(posts)
       this.setState({
         posts: posts
       })
     })
   }
 
-
   onPostClickHandler = (e) => {
-    // console.log(e.currentTarget.id);
-    this.setState({
-      currentPost: e.currentTarget.id
+    let spotArray = this.state.brightSpots.map(spot =>{
+      if (spot.id === parseInt(e.currentTarget.id)){
+        this.setState({
+          currentPost: spot
+        })
+      }
     })
   }
 
   render() {
     return(
       <div className='App'>
-        <NavBar />
+        <NavBar
+          brightSpots={this.state.brightSpots}
+          posts={this.state.posts}
+          />
         <MapContainer
           brightSpots={this.state.brightSpots}
           />
+
         <PostContainer
           brightSpots={this.state.brightSpots}
           posts={this.state.posts}
           onClick={this.onPostClickHandler}
           currentPost={this.state.currentPost}
            />
-         <BrightSpotContainer
-           currentPost={this.props.currentPost}
-           /> 
       </div>
 
   )}
 }
 
 export default App;
+
+
+// if this.state.currentPost ? &&
+//   this.state.currentPost === this.state.brightSpots.id {
+//     <div>
+//       <BrightSpotContainer
+//         currentPost={this.state.currentPost}
+//         brightSpots={this.state.brightSpots}
+//         />
+//     </div> }
+//       : null

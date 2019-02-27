@@ -71,7 +71,7 @@ loadMap() {
         zoom: zoom
       }
     );
-    // maps.Map() is constructor that instantiates the map
+    // maps.Map() is a constructor that instantiates the map
     this.map = new maps.Map(node, mapConfig);
   }
 }
