@@ -115,7 +115,6 @@ class App extends Component {
         />
 
         <Route exact path='/post/:id' render={(props)=>{
-          // debugger
           let postIDinURL = props.match.params.id
           let post = this.state.posts.find(post => post.id === postIDinURL)
 

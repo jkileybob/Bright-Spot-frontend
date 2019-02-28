@@ -24,11 +24,12 @@ export class CurrentLocation extends React.Component {
     }
   };
 }
+// checks for JS navigator
 componentDidMount() {
   if (this.props.centerAroundCurrentLocation) {
     if (navigator && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(pos => {
-        const coords = pos.coords;
+      navigator.geolocation.getCurrentPosition(position => {
+        const coords = position.coords;
         this.setState({
           currentLocation: {
             lat: coords.latitude,
@@ -51,11 +52,10 @@ componentDidUpdate(prevProps, prevState) {
 }
 
 loadMap() {
+  // checks if google is available
   if (this.props && this.props.google) {
-    // checks if google is available
     const { google } = this.props;
     const maps = google.maps;
-
     const mapRef = this.refs.map;
 
     // reference to the actual DOM element
@@ -89,14 +89,17 @@ recenterMap() {
   }
 }
 
+// grabs children of CurrentLocation (aka Marker and InfoWindow) from MapCont
+// clones and replaces them to have new shallowly merged props
 renderChildren() {
+  // debugger
   const { children } = this.props;
 
   if (!children) return;
 
-  return React.Children.map(children, c => {
-    if (!c) return;
-    return React.cloneElement(c, {
+  return React.Children.map(children, child => {
+    if (!child) return;
+    return React.cloneElement(child, {
       map: this.map,
       google: this.props.google,
       mapCenter: this.state.currentLocation
@@ -104,15 +107,20 @@ renderChildren() {
   });
 }
   render() {
+    // Object.assign(trgt, src) copies values of all enumerable own
+    // properties from one or more source objects to a target object
+    // then returns that target object
     const style = Object.assign({}, mapStyles.map);
 
     return (
-      <div className="map">
-        <div style={style} ref="map">
-          Loading map...
+      <main>
+        <div className="map">
+          <div style={style} ref="map">
+            Loading map...
+          </div>
+          {this.renderChildren()}
         </div>
-        {this.renderChildren()}
-      </div>
+      </main>
     );
   }
 }

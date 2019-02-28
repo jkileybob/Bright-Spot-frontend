@@ -33,13 +33,12 @@ export class MapContainer extends Component {
     }
   };
 
-
+// searchbar stuff
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state.addressInput);
 
   }
-
   onChangeHandler = (e) => {
     // console.log(e.target.value);
     this.setState({
@@ -47,8 +46,8 @@ export class MapContainer extends Component {
     })
   }
 
-  render(){
 
+  render(){
 
     if (!this.props.loaded) {
       return <div>Loading BrightSpot...</div>
@@ -60,7 +59,7 @@ export class MapContainer extends Component {
         onChange={this.onChangeHandler}
         />
       <CurrentLocation centerAroundCurrentLocation google={this.props.google}>
-        <Marker onClick={this.onMarkerClick} name={'current location'} />
+        <Marker onClick={this.onMarkerClick} name={'You are here.'} />
         <InfoWindow
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}
