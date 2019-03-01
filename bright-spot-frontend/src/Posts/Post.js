@@ -18,8 +18,8 @@ export class Post extends React.Component {
       {this.props.brightSpot.map(spot =>{
         if (spot.id === this.props.post.bright_spot_id){
           return (
-            <div className='post'>
-              <p key={`post-name-header-${spot.id}`}>{spot.name}</p>
+            <div className='post' key={`post-${spot.id}`}>
+              <p className='post' key={`post-name-header-${spot.id}`}>{spot.name}</p>
             </div>
           )}
         }

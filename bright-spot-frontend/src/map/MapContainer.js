@@ -48,7 +48,7 @@ export class MapContainer extends Component {
 
 
   render(){
-
+    // console.log(this.props)
     if (!this.props.loaded) {
       return <div>Loading BrightSpot...</div>
     }
@@ -57,18 +57,20 @@ export class MapContainer extends Component {
       <SearchLocation
         onSubmit={this.handleSubmit}
         onChange={this.onChangeHandler}
-        />
-      <CurrentLocation centerAroundCurrentLocation google={this.props.google}>
-        <Marker onClick={this.onMarkerClick} name={'You are here.'} />
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-          onClose={this.onClose}
-        >
-          <div>
-            <h4>{this.state.selectedPlace.name}</h4>
-          </div>
-        </InfoWindow>
+      />
+      <CurrentLocation
+        centerAroundCurrentLocation
+        google={this.props.google}
+        spots={this.props.brightSpots}  >
+          <Marker onClick={this.onMarkerClick} name={'You are here.'} />
+          <InfoWindow
+            marker={this.state.activeMarker}
+            visible={this.state.showingInfoWindow}
+            onClose={this.onClose}  >
+              <div>
+                <h4>{this.state.selectedPlace.name}</h4>
+              </div>
+          </InfoWindow>
       </CurrentLocation>
     </React.Fragment>
     );

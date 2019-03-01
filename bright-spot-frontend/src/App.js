@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {Route} from 'react-router-dom'
+import '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/App.css'
 import NavBar from '../src/NavBar'
 import MapContainer from '../src/map/MapContainer'
 import BrightSpotContainer from '../src/BrightSpot/BrightSpotContainer'
 import PostContainer from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/Posts/PostContainer.js'
 import Post from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/Posts/Post.js'
 import NewPostForm from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/Posts/NewPostForm.js'
+import RealMap from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/map/RealMap.js'
 
 class App extends Component {
 
@@ -39,7 +41,7 @@ class App extends Component {
   }
 
   onPostClickHandler = (e) => {
-    let spotArray = this.state.brightSpots.map(spot =>{
+    this.state.brightSpots.map(spot =>{
       if (spot.id === parseInt(e.currentTarget.id)){
         this.setState({
           currentPost: spot
@@ -47,6 +49,7 @@ class App extends Component {
       }
     })
   }
+
 
   // FORM STUFF:
   onClickNewHandler = (e) => {
@@ -95,13 +98,11 @@ class App extends Component {
           onClick={this.onClickNewHandler}
           />
 
-        <Route exact={true} path='/map' render={()=>{
-          return (
-            <MapContainer
-              brightSpots={this.state.brightSpots}
-            />
-          ) } }
-        />
+        <RealMap
+          spots={this.state.brightSpots}
+          google={this.props.google}
+
+           />
 
       <Route exact path='/home' render={()=>{
           return (
@@ -156,3 +157,16 @@ class App extends Component {
 }
 
 export default App;
+
+
+
+
+
+
+// <Route exact={true} path='/map' render={()=>{
+//   return (
+//     <MapContainer
+//       brightSpots={this.state.brightSpots}
+//     />
+//   ) } }
+// />

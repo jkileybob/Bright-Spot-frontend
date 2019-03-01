@@ -8,6 +8,7 @@ export class BrightSpotContainer extends React.Component {
       this.props.currentPost ?
       <div className='BrightSpotContainer'>
             <BrightSpot
+              className='bright-spot'
               key={`bright-spot-${this.props.currentPost.id}`}
               spot={this.props.currentPost}
               />

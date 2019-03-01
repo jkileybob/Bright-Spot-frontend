@@ -1,0 +1,21 @@
+.NavBar{
+  text-align: center;
+}
+
+.post {
+  display: block;
+  text-align: center;
+}
+.img {
+    position: relative;
+    width:  500px;
+    height: 500px;
+}
+.App {
+  /* not showing img */
+  /* background-image: image('/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/public/Image-1-3.jpeg'); */
+  background: image('/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/public/Image-1-3.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100px;
+  background-repeat: no-repeat;
+}
