@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom'
+import {Route, Link} from 'react-router-dom'
 import '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/App.css'
 import NavBar from '../src/NavBar'
-import MapContainer from '../src/map/MapContainer'
+// import MapContainer from '../src/map/MapContainer'
 import BrightSpotContainer from '../src/BrightSpot/BrightSpotContainer'
 import PostContainer from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/Posts/PostContainer.js'
 import Post from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/Posts/Post.js'
@@ -50,12 +50,20 @@ class App extends Component {
     })
   }
 
+// NAVBAR:
+  // onClickNewHandler = (e) => {
+  //   console.log(e)
+  // }
+  //
+  // onClickHomeHandler = (e) => {
+  //   console.log(e)
+  // }
+  //
+  // onClickMapHandler =(e) => {
+  //   console.log(e)
+  // }
 
   // FORM STUFF:
-  onClickNewHandler = (e) => {
-    console.log(e)
-  }
-
   nameHandler = (e) => {
     this.setState({
       postNameInput: e.target.value
@@ -73,6 +81,7 @@ class App extends Component {
       selectedFile: e.target.files[0]
     })
   }
+  
   // fileUploadHandler = (e) => {
   //   e.preventDefault();
   //   const fileData = new FormData();
@@ -84,9 +93,9 @@ class App extends Component {
   //will fetch post data to backend
   submitPostFormHandler = (e) => {
     e.preventDefault();
-    const fileData = new FormData();
-    fileData.append('image', this.state.selectedFile, this.state.selectedFile)
     console.log(e)
+    // const fileData = new FormData();
+    // fileData.append('image', this.state.selectedFile, this.state.selectedFile)
   }
 
   render() {
@@ -95,13 +104,16 @@ class App extends Component {
         <NavBar
           brightSpots={this.state.brightSpots}
           posts={this.state.posts}
-          onClick={this.onClickNewHandler}
           />
 
-        <RealMap
-          spots={this.state.brightSpots}
-          google={this.props.google}
-           />
+        <Route exact path='/map' render={()=>{
+        return(
+          <RealMap
+            spots={this.state.brightSpots}
+            google={this.props.google}
+          />
+        ) } }
+       />
 
       <Route exact path='/home' render={()=>{
           return (
@@ -138,15 +150,14 @@ class App extends Component {
           ) } }
         />
 
-
-        <Route exact path='/new-post' render={()=>{
+        <Route exact path="/new-post" render={()=>{
           return(
             <NewPostForm
              fileSelect={this.fileSelectHandler}
              fileUpload={this.fileUploadHandler}
-             submitPostForm={this.submitPostFormHandler}
              inputName={this.nameHandler}
              inputDescription={this.descriptionHandler}
+             submitPostForm={this.submitPostFormHandler}
             />
           ) } }
         />
@@ -156,16 +167,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-
-
-
-
-// <Route exact={true} path='/map' render={()=>{
-//   return (
-//     <MapContainer
-//       brightSpots={this.state.brightSpots}
-//     />
-//   ) } }
-// />

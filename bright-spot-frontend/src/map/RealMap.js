@@ -2,29 +2,57 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 
+
 export class RealMap extends React.Component {
 
-  state = {
-   showingInfoWindow: false,
-   activeMarker: {},
-   selectedPlace: {},
-  };
+
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+     center: {}
+    };
+  }
+
 
   componentDidMount(){
     // debugger
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.centerMap)
+    } else {alert("I'm sorry! Your browser doesn't support your pursuit of happiness.")}
+  }
+
+  centerMap = (position) => {
+    let coords = new this.props.google.maps.LatLng(
+      position.coords.latitude,
+      position.coords.longitude
+    );
+
+    this.setState({
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    })
+
   }
 
   render(){
-    // console.log(Number(this.props.spots[0].longitude))
+
     return(
-      <div>
-        <Map google={this.props.google}>
-        {this.props.spots.map(spot =>
-          <Marker
-          spot={spot}
-          position={{lat: Number(spot.latitude), lng: Number(spot.longitude)}}
-          />
-        )}
+      <div className='map'>
+        <Map
+        google={this.props.google}
+        zoom={15}
+        centerAroundCurrentLocation={this.state.center}
+        >
+
+          {this.props.spots.map(spot =>
+            <Marker
+            spot={spot}
+            position={{lat: Number(spot.latitude), lng: Number(spot.longitude)}}
+            />
+          )}
+
         </Map>
       </div>
     )
