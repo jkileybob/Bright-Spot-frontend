@@ -101,7 +101,6 @@ class App extends Component {
         <RealMap
           spots={this.state.brightSpots}
           google={this.props.google}
-
            />
 
       <Route exact path='/home' render={()=>{

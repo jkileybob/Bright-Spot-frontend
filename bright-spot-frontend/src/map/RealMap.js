@@ -11,18 +11,18 @@ export class RealMap extends React.Component {
   };
 
   componentDidMount(){
-    debugger
+    // debugger
   }
 
   render(){
-    // console.log(this.props.spots)
+    // console.log(Number(this.props.spots[0].longitude))
     return(
       <div>
         <Map google={this.props.google}>
         {this.props.spots.map(spot =>
           <Marker
           spot={spot}
-          position={{lat: spot.latitude, lng: spot.longitude}}
+          position={{lat: Number(spot.latitude), lng: Number(spot.longitude)}}
           />
         )}
         </Map>
