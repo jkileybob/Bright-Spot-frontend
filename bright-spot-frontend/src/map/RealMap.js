@@ -5,8 +5,6 @@ import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 export class RealMap extends React.Component {
 
-
-
   constructor(props) {
     super(props);
 
@@ -14,7 +12,6 @@ export class RealMap extends React.Component {
      center: {}
     };
   }
-
 
   componentDidMount(){
     // debugger
@@ -30,10 +27,11 @@ export class RealMap extends React.Component {
     );
 
     this.setState({
+      center: {
       lat: position.coords.latitude,
       lng: position.coords.longitude
+      }
     })
-
   }
 
   render(){

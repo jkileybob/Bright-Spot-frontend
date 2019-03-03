@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom'
-import '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/App.css'
+import '../src/App.css'
 import NavBar from '../src/NavBar'
-// import MapContainer from '../src/map/MapContainer'
+import Home from '../src/Home'
+import About from '../src/About'
+import BrightSpot from '../src/BrightSpot/BrightSpot'
 import BrightSpotContainer from '../src/BrightSpot/BrightSpotContainer'
-import PostContainer from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/Posts/PostContainer.js'
-import Post from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/Posts/Post.js'
-import NewPostForm from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/Posts/NewPostForm.js'
-import RealMap from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/map/RealMap.js'
+import PostContainer from '../src/Posts/PostContainer.js'
+import Post from '../src/Posts/Post.js'
+import NewPostForm from '../src/Posts/NewPostForm.js'
+import RealMap from '../src/map/RealMap.js'
+
 
 class App extends Component {
 
@@ -50,18 +53,6 @@ class App extends Component {
     })
   }
 
-// NAVBAR:
-  // onClickNewHandler = (e) => {
-  //   console.log(e)
-  // }
-  //
-  // onClickHomeHandler = (e) => {
-  //   console.log(e)
-  // }
-  //
-  // onClickMapHandler =(e) => {
-  //   console.log(e)
-  // }
 
   // FORM STUFF:
   nameHandler = (e) => {
@@ -81,7 +72,7 @@ class App extends Component {
       selectedFile: e.target.files[0]
     })
   }
-  
+
   // fileUploadHandler = (e) => {
   //   e.preventDefault();
   //   const fileData = new FormData();
@@ -106,6 +97,18 @@ class App extends Component {
           posts={this.state.posts}
           />
 
+        <Route exact path='/home' render={()=>{
+          return(
+            <Home />
+          ) } }
+        />
+
+      <Route exact path='/about' render={()=>{
+          return(
+            <About />
+          ) } }
+        />
+
         <Route exact path='/map' render={()=>{
         return(
           <RealMap
@@ -113,42 +116,19 @@ class App extends Component {
             google={this.props.google}
           />
         ) } }
-       />
-
-      <Route exact path='/home' render={()=>{
-          return (
-            <PostContainer
-              brightSpots={this.state.brightSpots}
-              posts={this.state.posts}
-              onClick={this.onPostClickHandler}
-              currentPost={this.state.currentPost}
-            />
-          ) } }
         />
 
-        <Route exact path='/post/:id' render={(props)=>{
-          let postIDinURL = props.match.params.id
-          let post = this.state.posts.find(post => post.id === postIDinURL)
-
-          return(
-            <Post
-              id={`post-${this.state.currentPost.id}`}
-              key={`post-${this.state.currentPost.id}`}
-              post={this.state.posts}
-              brightSpot={this.state.brightSpots}
-              currentPost={this.state.currentPost}
-              onClick={this.onPostClickHandler}
-            />
+      <Route exact path='/bright-spots' render={()=>{
+            return (
+              <PostContainer
+                brightSpots={this.state.brightSpots}
+                posts={this.state.posts}
+                onClick={this.onPostClickHandler}
+                currentPost={this.state.currentPost}
+              />
             ) } }
         />
 
-        <Route exact path='/bright-spots' render={()=>{
-          return(
-            <BrightSpotContainer
-             currentPost={this.state.currentPost}
-            />
-          ) } }
-        />
 
         <Route exact path="/new-post" render={()=>{
           return(
@@ -167,3 +147,28 @@ class App extends Component {
 }
 
 export default App;
+
+
+// <Route exact path='/bright-spots' render={()=>{
+//     return(
+//       <BrightSpotContainer
+//         currentPost={this.state.currentPost}
+//         />
+//     ) } }
+//     />
+
+// <Route exact path='/bright-spots/:id' render={(props)=>{
+//   let brightSpotIDinURL = props.match.params.id
+//   let brightSpot = this.state.currentPost.find(spot => spot.id === brightSpotIDinURL)
+//
+//   return(
+//     <BrightSpotContainer
+//       id={`post-${this.state.currentPost.id}`}
+//       key={`post-${this.state.currentPost.id}`}
+//       post={this.state.posts}
+//       brightSpot={this.state.brightSpots}
+//       currentPost={this.state.currentPost}
+//       onClick={this.onPostClickHandler}
+//     />
+//     ) } }
+// />
