@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 
 
 export class RealMap extends React.Component {
@@ -19,6 +19,8 @@ export class RealMap extends React.Component {
       navigator.geolocation.getCurrentPosition(this.centerMap)
     } else {alert("I'm sorry! Your browser doesn't support your pursuit of happiness.")}
   }
+
+
 
   centerMap = (position) => {
     let coords = new this.props.google.maps.LatLng(
@@ -41,15 +43,34 @@ export class RealMap extends React.Component {
         <Map
         google={this.props.google}
         zoom={15}
-        centerAroundCurrentLocation={this.state.center}
+        initialCenter={this.state.center}
+        centerAroundCurrentLocation
         >
+          <Marker
+            onClick={this.props.onMarkerClick}
+            name={'You are here.'}
+            postion={this.state.mapCenter}
+          />
 
           {this.props.spots.map(spot =>
             <Marker
-            spot={spot}
-            position={{lat: Number(spot.latitude), lng: Number(spot.longitude)}}
+              onClick={this.props.onMarkerClick}
+              spot={spot}
+              position={{lat: Number(spot.latitude), lng: Number(spot.longitude)}}
             />
           )}
+
+          {
+            // this.props.currentPost ?
+            <InfoWindow
+              visible={this.props.showingInfoWindow}
+              onClose={this.onClose}  >
+                <div>
+                  <h4>{this.props.selectedPlace.name}</h4>
+                </div>
+            </InfoWindow>
+            // : null
+          }
 
         </Map>
       </div>

@@ -63,6 +63,8 @@ export class MapContainer extends Component {
         google={this.props.google}
         spots={this.props.brightSpots}  >
           <Marker onClick={this.onMarkerClick} name={'You are here.'} />
+
+
           <InfoWindow
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}
@@ -71,6 +73,8 @@ export class MapContainer extends Component {
                 <h4>{this.state.selectedPlace.name}</h4>
               </div>
           </InfoWindow>
+
+
       </CurrentLocation>
     </React.Fragment>
     );

@@ -18,7 +18,12 @@ class App extends Component {
   state = {
     brightSpots: [],      //all spots
     posts: [],            //all posts
-    currentPost: null,    //currentPost for single render
+    currentPost: null,    //selected post
+
+    showingInfoWindow: false,
+    activeMarker: {},
+    selectedPlace: {},
+
     selectedFile: null,   //photo upload selector status
     postNameInput: '',    //controlled form states
     postDescrInput: ''    //for new post form
@@ -53,6 +58,15 @@ class App extends Component {
     })
   }
 
+  onMarkerClickHandler = (props, marker, e) => {
+    console.log(e.spot)
+    this.setState({
+      currentPost: e.spot,
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true
+    })
+  }
 
   // FORM STUFF:
   nameHandler = (e) => {
@@ -114,6 +128,10 @@ class App extends Component {
           <RealMap
             spots={this.state.brightSpots}
             google={this.props.google}
+            selectedPlace={this.state.selectedPlace}
+            showingInfoWindow={this.state.showingInfoWindow}
+            activeMarker={this.state.activeMarker}
+            onMarkerClick={this.onMarkerClickHandler}
           />
         ) } }
         />
