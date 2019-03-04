@@ -68,6 +68,11 @@ class App extends Component {
   onNameClickHandler = (e) => {
     console.log(e)
   }
+  onCloseIWHandler = (e) => {
+    this.setState({
+      visible: false
+    })
+  }
 
   // FORM STUFF:
   nameHandler = (e) => {
@@ -131,6 +136,7 @@ class App extends Component {
             google={this.props.google}
             currentPost={this.state.currentPost}
             visible={this.state.visible}
+            onClose={this.onCloseIWHandler}
             onMarkerClick={this.onMarkerClickHandler}
             onNameClick={this.onNameClickHandler}
           />

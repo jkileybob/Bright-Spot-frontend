@@ -1,9 +1,20 @@
-// <Marker
-//   onClick={this.props.onMarkerClick}
-//   name={'You are here.'}
-//   postion={this.state.mapCenter}
-// />
+<Marker
+  position={this.state.center}
+  icon='http://maps.google.com/mapfiles/kml/paddle/grn-blank.png'
+  onClick={this.onClickCurrentLocationHandler}
+ />
 
+{this.state.visible ?
+ <InfoWindow
+   postion={this.state.center}
+   map={this.props.map}
+   google={this.props.google}
+   visible={this.state.visible} >
+    <div>
+      <h1>you are here.</h1>
+    </div>
+ </InfoWindow>
+ : null }
 // <Route exact path='/bright-spots' render={()=>{
 //     return(
 //       <BrightSpotContainer

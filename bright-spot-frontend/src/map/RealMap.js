@@ -8,7 +8,8 @@ export class RealMap extends React.Component {
     super(props);
 
     this.state = {
-     center: {}
+     center: {},
+     visible: false
     };
   }
 
@@ -33,8 +34,22 @@ export class RealMap extends React.Component {
     })
   }
 
+  onClickCurrentLocationHandler = (e) => {
+    console.log(e.position);
+    this.setState({
+      visible: true
+    })
+  }
+
+  onCloseCurrentLocationHandler = (e) => {
+    this.setState({
+      visible: false
+    })
+  }
+
+
   render(){
-console.log(this.props.currentPost.posts)
+// console.log(this.props.currentPost.posts)
     return(
       <div className='map'>
         <Map
@@ -142,6 +157,25 @@ console.log(this.props.currentPost.posts)
     }
 ]}
         >
+          <Marker
+            position={this.state.center}
+            icon='http://maps.google.com/mapfiles/kml/paddle/grn-blank.png'
+            onClick={this.onClickCurrentLocationHandler}
+           />
+
+         {this.state.visible ?
+           <InfoWindow
+             postion={this.state.center}
+             map={this.props.map}
+             google={this.props.google}
+             visible={this.state.visible}
+             onClose={this.onCloseCurrentLocationHandler}
+              >
+              <div>
+                <h1>you are here.</h1>
+              </div>
+           </InfoWindow>
+           : null }
 
           {this.props.spots.map(spot =>
             <Marker
@@ -159,11 +193,12 @@ console.log(this.props.currentPost.posts)
               map={this.props.map}
               google={this.props.google}
               visible={this.props.visible}
+              onClose={this.props.onClose}
               currentPost={this.props.currentPost}  >
                   <div>
-                    <h1
-                      onClick={this.props.onNameClick}
-                      >{this.props.currentPost.name}</h1>
+                    <h1 onClick={this.props.onNameClick} >
+                      {this.props.currentPost.name}
+                    </h1>
                     <p>{this.props.currentPost.description}</p>
                   </div>
             </InfoWindow>
