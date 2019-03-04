@@ -18,9 +18,9 @@ class App extends Component {
   state = {
     brightSpots: [],      //all spots
     posts: [],            //all posts
-    currentPost: null,    //selected post
+    currentPost: {},    //selected post
 
-    // showingInfoWindow: false,
+    visible: false,
     // activeMarker: {},
     // selectedPlace: {},
 
@@ -59,10 +59,14 @@ class App extends Component {
   }
 
   onMarkerClickHandler = (e) => {
-    console.log(e.spot)
+    // console.log(e.spot)
     this.setState({
-      currentPost: e.spot
+      currentPost: e.spot,
+      visible: true
     })
+  }
+  onNameClickHandler = (e) => {
+    console.log(e)
   }
 
   // FORM STUFF:
@@ -126,7 +130,9 @@ class App extends Component {
             spots={this.state.brightSpots}
             google={this.props.google}
             currentPost={this.state.currentPost}
+            visible={this.state.visible}
             onMarkerClick={this.onMarkerClickHandler}
+            onNameClick={this.onNameClickHandler}
           />
         ) } }
         />

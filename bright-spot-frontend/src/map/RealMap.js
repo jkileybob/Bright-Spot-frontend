@@ -34,16 +34,16 @@ export class RealMap extends React.Component {
   }
 
   render(){
-
+console.log(this.props.currentPost.posts)
     return(
       <div className='map'>
         <Map
-        google={this.props.google}
-        zoom={15}
-        initialCenter={this.state.center}
-        center={this.state.center}
-        centerAroundCurrentLocation
-        styles={[
+          google={this.props.google}
+          zoom={15}
+          initialCenter={this.state.center}
+          center={this.state.center}
+          centerAroundCurrentLocation
+          styles={[
     {
         "featureType": "administrative",
         "elementType": "labels.text.fill",
@@ -155,11 +155,17 @@ export class RealMap extends React.Component {
 
           {this.props.currentPost ?
             <InfoWindow
+              position={{lat: this.props.currentPost.latitude, lng: this.props.currentPost.longitude}}
               map={this.props.map}
-              onClose={this.onClose}  >
-                <div>
-                  <h4>{this.props.currentPost.name}</h4>
-                </div>
+              google={this.props.google}
+              visible={this.props.visible}
+              currentPost={this.props.currentPost}  >
+                  <div>
+                    <h1
+                      onClick={this.props.onNameClick}
+                      >{this.props.currentPost.name}</h1>
+                    <p>{this.props.currentPost.description}</p>
+                  </div>
             </InfoWindow>
             : null}
 
