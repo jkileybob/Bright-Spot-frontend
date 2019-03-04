@@ -149,7 +149,7 @@ export class RealMap extends React.Component {
               spot={spot}
               position={{lat: Number(spot.latitude), lng: Number(spot.longitude)}}
               class='marker'
-              icon='http://maps.google.com/mapfiles/kml/paddle/grn-blank.png'
+              icon='http://maps.google.com/mapfiles/kml/paddle/orange-blank.png'
             />
           )}
 
