@@ -15,6 +15,23 @@
     </div>
  </InfoWindow>
  : null }
+
+
+
+
+
+ <BrightSpot
+   id={`post-${this.props.currentPost.id}`}
+   key={`post-${this.props.currentPost.id}`}
+   post={this.props.currentPost}
+ />
+
+
+
+
+
+
+
 // <Route exact path='/bright-spots' render={()=>{
 //     return(
 //       <BrightSpotContainer

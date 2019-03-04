@@ -4,7 +4,7 @@ import React from 'react'
 export class Post extends React.Component {
 
   render(){
-    // console.log(this.props.brightSpot)
+    // console.log(this.props)
   return(
     <div className='post'>
       <img

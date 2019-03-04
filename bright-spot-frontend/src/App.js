@@ -8,6 +8,7 @@ import BrightSpot from '../src/BrightSpot/BrightSpot'
 import BrightSpotContainer from '../src/BrightSpot/BrightSpotContainer'
 import PostContainer from '../src/Posts/PostContainer.js'
 import Post from '../src/Posts/Post.js'
+
 import NewPostForm from '../src/Posts/NewPostForm.js'
 import RealMap from '../src/map/RealMap.js'
 
@@ -51,6 +52,7 @@ class App extends Component {
 
 // POST CLICKS:
   onPostClickHandler = (e) => {
+    console.log(e.currentTarget);
     this.state.brightSpots.map(spot =>{
       if (spot.id === parseInt(e.currentTarget.id)){
         this.setState({
@@ -69,16 +71,14 @@ class App extends Component {
       visible: true
     })
   }
-  // onInfoWindowClickHandler = (e) => {
-  //   console.log(e)
-  // }
+
   onCloseIWHandler = (e) => {
     this.setState({
       visible: false
     })
   }
 
-  // FORM STUFF:
+  // FORM CLICKS:
   nameHandler = (e) => {
     this.setState({
       postNameInput: e.target.value
@@ -120,6 +120,12 @@ class App extends Component {
           brightSpots={this.state.brightSpots}
           posts={this.state.posts}
           />
+
+        {this.state.currentPost ?
+          <BrightSpot
+            currentPost={this.state.currentPost}
+          />
+          :null }
 
         <Route exact path='/home' render={()=>{
           return(
