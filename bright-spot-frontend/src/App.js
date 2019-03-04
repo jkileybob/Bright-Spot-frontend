@@ -20,9 +20,9 @@ class App extends Component {
     posts: [],            //all posts
     currentPost: null,    //selected post
 
-    showingInfoWindow: false,
-    activeMarker: {},
-    selectedPlace: {},
+    // showingInfoWindow: false,
+    // activeMarker: {},
+    // selectedPlace: {},
 
     selectedFile: null,   //photo upload selector status
     postNameInput: '',    //controlled form states
@@ -58,13 +58,10 @@ class App extends Component {
     })
   }
 
-  onMarkerClickHandler = (props, marker, e) => {
+  onMarkerClickHandler = (e) => {
     console.log(e.spot)
     this.setState({
-      currentPost: e.spot,
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
+      currentPost: e.spot
     })
   }
 
@@ -128,9 +125,7 @@ class App extends Component {
           <RealMap
             spots={this.state.brightSpots}
             google={this.props.google}
-            selectedPlace={this.state.selectedPlace}
-            showingInfoWindow={this.state.showingInfoWindow}
-            activeMarker={this.state.activeMarker}
+            currentPost={this.state.currentPost}
             onMarkerClick={this.onMarkerClickHandler}
           />
         ) } }
@@ -165,28 +160,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-// <Route exact path='/bright-spots' render={()=>{
-//     return(
-//       <BrightSpotContainer
-//         currentPost={this.state.currentPost}
-//         />
-//     ) } }
-//     />
-
-// <Route exact path='/bright-spots/:id' render={(props)=>{
-//   let brightSpotIDinURL = props.match.params.id
-//   let brightSpot = this.state.currentPost.find(spot => spot.id === brightSpotIDinURL)
-//
-//   return(
-//     <BrightSpotContainer
-//       id={`post-${this.state.currentPost.id}`}
-//       key={`post-${this.state.currentPost.id}`}
-//       post={this.state.posts}
-//       brightSpot={this.state.brightSpots}
-//       currentPost={this.state.currentPost}
-//       onClick={this.onPostClickHandler}
-//     />
-//     ) } }
-// />

@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 
-
 export class RealMap extends React.Component {
 
   constructor(props) {
@@ -19,8 +18,6 @@ export class RealMap extends React.Component {
       navigator.geolocation.getCurrentPosition(this.centerMap)
     } else {alert("I'm sorry! Your browser doesn't support your pursuit of happiness.")}
   }
-
-
 
   centerMap = (position) => {
     let coords = new this.props.google.maps.LatLng(
@@ -44,13 +41,107 @@ export class RealMap extends React.Component {
         google={this.props.google}
         zoom={15}
         initialCenter={this.state.center}
+        center={this.state.center}
         centerAroundCurrentLocation
+        styles={[
+    {
+        "featureType": "administrative",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "color": "#444444"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#f2f2f2"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
+            {
+                "saturation": -100
+            },
+            {
+                "lightness": 45
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#ff00ff"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#ffff00"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#00ffff"
+            },
+            {
+                "visibility": "on"
+            }
+        ]
+    }
+]}
         >
-          <Marker
-            onClick={this.props.onMarkerClick}
-            name={'You are here.'}
-            postion={this.state.mapCenter}
-          />
 
           {this.props.spots.map(spot =>
             <Marker
@@ -60,17 +151,15 @@ export class RealMap extends React.Component {
             />
           )}
 
-          {
-            // this.props.currentPost ?
+          {this.props.currentPost ?
             <InfoWindow
-              visible={this.props.showingInfoWindow}
+              map={this.props.map}
               onClose={this.onClose}  >
                 <div>
-                  <h4>{this.props.selectedPlace.name}</h4>
+                  <h4>{this.props.currentPost.name}</h4>
                 </div>
             </InfoWindow>
-            // : null
-          }
+            : null}
 
         </Map>
       </div>
