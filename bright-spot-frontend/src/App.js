@@ -48,6 +48,8 @@ class App extends Component {
     })
   }
 
+
+// POST CLICKS:
   onPostClickHandler = (e) => {
     this.state.brightSpots.map(spot =>{
       if (spot.id === parseInt(e.currentTarget.id)){
@@ -58,6 +60,8 @@ class App extends Component {
     })
   }
 
+
+// MAP CLICKS:
   onMarkerClickHandler = (e) => {
     // console.log(e.spot)
     this.setState({
@@ -65,9 +69,9 @@ class App extends Component {
       visible: true
     })
   }
-  onNameClickHandler = (e) => {
-    console.log(e)
-  }
+  // onInfoWindowClickHandler = (e) => {
+  //   console.log(e)
+  // }
   onCloseIWHandler = (e) => {
     this.setState({
       visible: false
@@ -138,7 +142,7 @@ class App extends Component {
             visible={this.state.visible}
             onClose={this.onCloseIWHandler}
             onMarkerClick={this.onMarkerClickHandler}
-            onNameClick={this.onNameClickHandler}
+            onInfoWindowClick={this.onInfoWindowClickHandler}
           />
         ) } }
         />

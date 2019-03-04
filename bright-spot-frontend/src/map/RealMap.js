@@ -35,18 +35,25 @@ export class RealMap extends React.Component {
   }
 
   onClickCurrentLocationHandler = (e) => {
-    console.log(e.position);
-    this.setState({
-      visible: true
-    })
+    alert("This is your current location!")
   }
 
-  onCloseCurrentLocationHandler = (e) => {
-    this.setState({
-      visible: false
-    })
+  onInfoWindowOpen(props, e) {
+    const button = (
+      <button
+        onClick={e => {
+          console.log("works, but now i need to redirect");
+          
+        }}
+      >
+        show me more.
+      </button>
+    );
+    ReactDOM.render(
+      React.Children.only(button),
+      document.getElementById("iwc")
+    );
   }
-
 
   render(){
 // console.log(this.props.currentPost.posts)
@@ -163,20 +170,6 @@ export class RealMap extends React.Component {
             onClick={this.onClickCurrentLocationHandler}
            />
 
-         {this.state.visible ?
-           <InfoWindow
-             postion={this.state.center}
-             map={this.props.map}
-             google={this.props.google}
-             visible={this.state.visible}
-             onClose={this.onCloseCurrentLocationHandler}
-              >
-              <div>
-                <h1>you are here.</h1>
-              </div>
-           </InfoWindow>
-           : null }
-
           {this.props.spots.map(spot =>
             <Marker
               onClick={this.props.onMarkerClick}
@@ -194,13 +187,16 @@ export class RealMap extends React.Component {
               google={this.props.google}
               visible={this.props.visible}
               onClose={this.props.onClose}
-              currentPost={this.props.currentPost}  >
+              currentPost={this.props.currentPost}
+              onOpen={e => {
+                this.onInfoWindowOpen(this.props, e);
+              }}
+                >
                   <div>
-                    <h1 onClick={this.props.onNameClick} >
-                      {this.props.currentPost.name}
-                    </h1>
+                    <h1>{this.props.currentPost.name}</h1>
                     <p>{this.props.currentPost.description}</p>
                   </div>
+                  <div id="iwc" />
             </InfoWindow>
             : null}
 
