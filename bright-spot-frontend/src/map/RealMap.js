@@ -42,9 +42,7 @@ export class RealMap extends React.Component {
     const button = (
       <button
         onClick={e => {
-          console.log("works, but now i need to redirect");
-          
-        }}
+this.props.history.push(`/bright-spots/`);        }}
       >
         show me more.
       </button>
