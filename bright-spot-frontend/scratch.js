@@ -36,13 +36,13 @@
     />
 
 <Route exact path='/bright-spots/:id' render={(props)=>{
-  let spotIDinURL = props.match.params.id
-  let spot = this.state.currentPost.find(spot => spot.id === spotIDinURL)
-
+  let spotIDinURL = parseInt(props.match.params.id)
+  let spot = this.state.brightSpots.filter(spot => spot.id === spotIDinURL)
+debugger
   return(
     <BrightSpot
-      id={`post-${this.props.currentPost.id}`}
-      key={`post-${this.props.currentPost.id}`}
+      id={`bright-spot-${this.props.currentPost.id}`}
+      key={`bright-spot-${this.props.currentPost.id}`}
       currentPost={this.state.currentPost}
       showModal={this.state.showModal}
       onClickClose={this.hideModal}
@@ -60,7 +60,7 @@
 
   <Route exact path='/bright-spots/:id' render={(props)=>{
       let brightSpotIDinURL = props.match.params.id
-      let spot = this.state.brightSpots.find(spot => spot.id === brightSpotIDinURL)
+      let spot = this.state.brightSpots.filter(spot => spot.id === brightSpotIDinURL)
 
       return(
         <BrightSpotContainer
