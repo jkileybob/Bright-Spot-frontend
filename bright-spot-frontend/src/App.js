@@ -60,7 +60,6 @@ class App extends Component {
   }
 
   hideModal = (e) => {
-    console.log("closed")
     this.setState({
       currentPost: {},
       showModal: false
@@ -165,14 +164,11 @@ class App extends Component {
         />
 
         <Route exact path='/bright-spots/:id' render={(props)=>{
-          console.log(props.match.params.id);
           return <BrightSpot
               currentPost={this.state.currentPost}
-            />
-
-        } }
+              />
+          } }
         />
-
 
         <Route exact path="/new-post" render={()=>{
           return(
