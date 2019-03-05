@@ -9,6 +9,7 @@ const NavBar = (props) => {
       <Link to="/map">map.</Link>
       <Link to="/bright-spots">spots.</Link>
       <Link to='/new-post'>create.</Link>
+      <p>sometimes you need a quick</p>
       <h1>BrightSpot</h1>
     </div>
   )

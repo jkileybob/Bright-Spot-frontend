@@ -16,14 +16,11 @@ class App extends Component {
 
   // STATE:
   state = {
-    brightSpots: [],      //all spots
-    posts: [],            //all posts
-    currentPost: {},    //selected post
-
-    visible: false,
-    // activeMarker: {},
-    // selectedPlace: {},
-
+    brightSpots: [],     //all spots
+    posts: [],           //all posts
+    currentPost: {},     //selected post
+    visible: false,      //visibility of infowindow
+    showModal: false,    //visibility of modal
     selectedFile: null,   //photo upload selector status
     postNameInput: '',    //controlled form states
     postDescrInput: ''    //for new post form
@@ -51,12 +48,21 @@ class App extends Component {
 
 // POST CLICKS:
   onPostClickHandler = (e) => {
+    // console.log(e.currentTarget);
     this.state.brightSpots.map(spot =>{
       if (spot.id === parseInt(e.currentTarget.id)){
         this.setState({
-          currentPost: spot
+          currentPost: spot,
+          showModal: true
         })
       }
+    })
+  }
+
+  hideModal = (e) => {
+    this.setState({
+      currentPost: {},
+      showModal: false
     })
   }
 
@@ -69,16 +75,15 @@ class App extends Component {
       visible: true
     })
   }
-  // onInfoWindowClickHandler = (e) => {
-  //   console.log(e)
-  // }
+
   onCloseIWHandler = (e) => {
     this.setState({
       visible: false
     })
   }
 
-  // FORM STUFF:
+
+  // FORM CLICKS:
   nameHandler = (e) => {
     this.setState({
       postNameInput: e.target.value
@@ -108,7 +113,7 @@ class App extends Component {
   //will fetch post data to backend
   submitPostFormHandler = (e) => {
     e.preventDefault();
-    console.log(e)
+    // console.log(e)
     // const fileData = new FormData();
     // fileData.append('image', this.state.selectedFile, this.state.selectedFile)
   }
@@ -119,7 +124,7 @@ class App extends Component {
         <NavBar
           brightSpots={this.state.brightSpots}
           posts={this.state.posts}
-          />
+        />
 
         <Route exact path='/home' render={()=>{
           return(
@@ -127,37 +132,53 @@ class App extends Component {
           ) } }
         />
 
-      <Route exact path='/about' render={()=>{
-          return(
-            <About />
-          ) } }
-        />
-
-        <Route exact path='/map' render={()=>{
-        return(
-          <RealMap
-            spots={this.state.brightSpots}
-            google={this.props.google}
-            currentPost={this.state.currentPost}
-            visible={this.state.visible}
-            onClose={this.onCloseIWHandler}
-            onMarkerClick={this.onMarkerClickHandler}
-            onInfoWindowClick={this.onInfoWindowClickHandler}
-          />
-        ) } }
-        />
-
-      <Route exact path='/bright-spots' render={()=>{
-            return (
-              <PostContainer
-                brightSpots={this.state.brightSpots}
-                posts={this.state.posts}
-                onClick={this.onPostClickHandler}
-                currentPost={this.state.currentPost}
-              />
+        <Route exact path='/about' render={()=>{
+            return(
+              <About />
             ) } }
         />
 
+        <Route exact path='/map' render={()=>{
+          return(
+            <RealMap
+              spots={this.state.brightSpots}
+              google={this.props.google}
+              currentPost={this.state.currentPost}
+              visible={this.state.visible}
+              onClose={this.onCloseIWHandler}
+              onMarkerClick={this.onMarkerClickHandler}
+              onInfoWindowClick={this.onInfoWindowClickHandler}
+            />
+          ) } }
+        />
+
+        <Route exact path='/bright-spots' render={()=>{
+              return (
+                <PostContainer
+                  brightSpots={this.state.brightSpots}
+                  posts={this.state.posts}
+                  onClick={this.onPostClickHandler}
+                  currentPost={this.state.currentPost}
+                />
+              ) } }
+        />
+
+        <Route exact path='/bright-spots/:id' render={(props)=>{
+          let spotIDinURL = parseInt(props.match.params.id)
+          const a = this
+          let spot = this.state.brightSpots.find(spot => spot.id === spotIDinURL)
+        // debugger
+          return(
+            spot ?
+            <BrightSpot
+              id={`bright-spot-${spot.id}`}
+              key={`bright-spot-${spot.id}`}
+              spot={spot}
+              showModal={this.state.showModal}
+              onClickClose={this.hideModal}
+            /> : null
+            ) } }
+        />
 
         <Route exact path="/new-post" render={()=>{
           return(

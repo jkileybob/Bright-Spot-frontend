@@ -1,3 +1,5 @@
+
+///////////////////////////CurrentLocation InfoWindow//////////////////////////////////////////////
 <Marker
   position={this.state.center}
   icon='http://maps.google.com/mapfiles/kml/paddle/grn-blank.png'
@@ -15,29 +17,38 @@
     </div>
  </InfoWindow>
  : null }
-// <Route exact path='/bright-spots' render={()=>{
-//     return(
-//       <BrightSpotContainer
-//         currentPost={this.state.currentPost}
-//         />
-//     ) } }
-//     />
 
-// <Route exact path='/bright-spots/:id' render={(props)=>{
-//   let brightSpotIDinURL = props.match.params.id
-//   let brightSpot = this.state.currentPost.find(spot => spot.id === brightSpotIDinURL)
-//
-//   return(
-//     <BrightSpotContainer
-//       id={`post-${this.state.currentPost.id}`}
-//       key={`post-${this.state.currentPost.id}`}
-//       post={this.state.posts}
-//       brightSpot={this.state.brightSpots}
-//       currentPost={this.state.currentPost}
-//       onClick={this.onPostClickHandler}
-//     />
-//     ) } }
-// />
+//////////////////////////////////////////////////////////////////////////////
+
+ <BrightSpot
+   id={`post-${this.props.currentPost.id}`}
+   key={`post-${this.props.currentPost.id}`}
+   post={this.props.currentPost}
+ />
+
+
+<Route exact path='/bright-spots' render={()=>{
+    return(
+      <BrightSpotContainer
+        currentPost={this.state.currentPost}
+        />
+    ) } }
+    />
+
+<Route exact path='/bright-spots/:id' render={(props)=>{
+  let spotIDinURL = parseInt(props.match.params.id)
+  let spot = this.state.brightSpots.filter(spot => spot.id === spotIDinURL)
+debugger
+  return(
+    <BrightSpot
+      id={`bright-spot-${this.props.currentPost.id}`}
+      key={`bright-spot-${this.props.currentPost.id}`}
+      currentPost={this.state.currentPost}
+      showModal={this.state.showModal}
+      onClickClose={this.hideModal}
+    />
+    ) } }
+/>
 
 
 <Route exact path='/posts/:id' render={()=>{
@@ -49,37 +60,11 @@
 
   <Route exact path='/bright-spots/:id' render={(props)=>{
       let brightSpotIDinURL = props.match.params.id
-      let spot = this.state.brightSpots.find(spot => spot.id === brightSpotIDinURL)
-      console.log(spot)
-      // debugger
+      let spot = this.state.brightSpots.filter(spot => spot.id === brightSpotIDinURL)
+
       return(
         <BrightSpotContainer
          currentPost={this.state.currentPost}
-         brightSpots={this.state.brightSpots}
         />
       ) } }
     />
-
-
-
-  <Route exact={true} path='/map' render={()=>{
-    return (
-      <MapContainer
-        brightSpots={this.state.brightSpots}
-      />
-    ) } }
-  />
-
-
-  // NAVBAR:
-    // onClickNewHandler = (e) => {
-    //   console.log(e)
-    // }
-    //
-    // onClickHomeHandler = (e) => {
-    //   console.log(e)
-    // }
-    //
-    // onClickMapHandler =(e) => {
-    //   console.log(e)
-    // }

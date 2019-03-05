@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Link } from 'react-router-dom'
 import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 
 export class RealMap extends React.Component {
@@ -39,16 +40,17 @@ export class RealMap extends React.Component {
   }
 
   onInfoWindowOpen(props, e) {
-    const button = (
-      <button
+    const link = (
+      <Link
         onClick={e => {
-this.props.history.push(`/bright-spots/`);        }}
+        }}
+        to={`/bright-spots/${this.props.currentPost.id}`}
       >
         show me more.
-      </button>
+      </Link>
     );
     ReactDOM.render(
-      React.Children.only(button),
+      React.Children.only(link),
       document.getElementById("iwc")
     );
   }

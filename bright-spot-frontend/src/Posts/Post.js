@@ -1,20 +1,26 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-// props consist of an id, a post obj, and a brightSpot obj
 export class Post extends React.Component {
 
+  
+
   render(){
-    // console.log(this.props.brightSpot)
+    // console.log(this.props)
   return(
     <div className='post'>
-      <img
-        className='img'
-        spot={this.props.brightSpot}
-        key={`post-img-${this.props.post.id}`}
-        id={this.props.post.id}
-        src={this.props.post.photo}
-        onClick={this.props.onClick}
-        />
+
+      <Link to={`/bright-spots/${this.props.post.id}`} >
+        <img
+          className='img'
+          spot={this.props.brightSpot}
+          key={`post-img-${this.props.post.id}`}
+          id={this.props.post.id}
+          src={this.props.post.photo}
+          onClick={this.props.onClick}
+          />
+      </Link>
+
       {this.props.brightSpot.map(spot =>{
         if (spot.id === this.props.post.bright_spot_id){
           return (
@@ -29,3 +35,7 @@ export class Post extends React.Component {
 }
 
 export default Post
+
+// get rid of onClick, replace with encompassing
+// <Link to=`/bright-spots/${this.props.currentPost.id}`></Link>
+// tags that trigger <Route path='/bright-spots/:id' />
