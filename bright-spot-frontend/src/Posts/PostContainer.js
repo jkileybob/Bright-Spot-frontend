@@ -15,6 +15,7 @@ export class PostContainer extends React.Component{
                 id={`post-${post.id}`}
                 key={`post-${post.id}`}
                 post={post}
+                currentPost={this.props.currentPost}
                 brightSpot={this.props.brightSpots}
                 onClick={this.props.onClick}
               />)

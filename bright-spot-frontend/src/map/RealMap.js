@@ -43,7 +43,6 @@ export class RealMap extends React.Component {
       <button
         onClick={e => {
           console.log("works, but now i need to redirect");
-          
         }}
       >
         show me more.
