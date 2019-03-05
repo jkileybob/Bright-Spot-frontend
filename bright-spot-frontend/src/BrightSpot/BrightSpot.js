@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const BrightSpot = (props) => {
 
 
-console.log(props)
+// console.log(props)
   return(
     <div className="bright-spot">
       <h1 key={`bright-spot-name-header-${props.spot.id}`}>{props.spot.name}</h1>
@@ -12,8 +12,6 @@ console.log(props)
       <Link to="/map">see it on the map.</Link>
       <h3 key={`bright-spot-description-${props.spot.id}`}>{props.spot.description}</h3>
       <img src={`${props.spot.posts[0].photo}`}/>
-
-
     </div>
   )
 }

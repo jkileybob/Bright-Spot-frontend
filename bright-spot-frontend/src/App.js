@@ -165,9 +165,8 @@ class App extends Component {
 
         <Route exact path='/bright-spots/:id' render={(props)=>{
           let spotIDinURL = parseInt(props.match.params.id)
-          const a = this
           let spot = this.state.brightSpots.find(spot => spot.id === spotIDinURL)
-        // debugger
+
           return(
             spot ?
             <BrightSpot

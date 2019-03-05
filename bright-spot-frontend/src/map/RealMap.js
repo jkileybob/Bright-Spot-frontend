@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import {Map, Marker, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 
 export class RealMap extends React.Component {
@@ -40,23 +40,19 @@ export class RealMap extends React.Component {
   }
 
   onInfoWindowOpen(props, e) {
-    const link = (
-      <Link
-        onClick={e => {
-        }}
-        to={`/bright-spots/${this.props.currentPost.id}`}
-      >
-        show me more.
-      </Link>
+    const button = (
+      <form action={`/bright-spots/${this.props.currentPost.id}`}>
+          <input type="submit" value="show me more." />
+      </form>
     );
     ReactDOM.render(
-      React.Children.only(link),
+      React.Children.only(button),
       document.getElementById("iwc")
     );
   }
 
   render(){
-// console.log(this.props.currentPost.posts)
+
     return(
       <div className='map'>
         <Map
