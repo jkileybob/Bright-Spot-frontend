@@ -2,8 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const BrightSpot = (props) => {
-
-
 // console.log(props)
   return(
     <div className="bright-spot">

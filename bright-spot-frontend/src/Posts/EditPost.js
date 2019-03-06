@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export class EditPostForm extends React.Component{
   render(){
@@ -9,17 +10,18 @@ export class EditPostForm extends React.Component{
 
         <input class='input'
           type='text'
-          placeholder={this.props.currentPost.name}
+          value={this.props.currentPost.name}
           onChange={this.props.inputName}
         />
       <input class='input'
           type='text'
-          placeholder={this.props.currentPost.description}
+          value={this.props.currentPost.description}
           onChange={this.props.inputDescription}
         />
 
         <button type='submit'>Submit</button>
       </form>
+    <Link to={`/bright-spots/${this.props.currentPost.id}`}>go back.</Link>
     </div>
   )}
 }
