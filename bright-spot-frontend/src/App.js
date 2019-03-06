@@ -9,6 +9,7 @@ import BrightSpotContainer from '../src/BrightSpot/BrightSpotContainer'
 import PostContainer from '../src/Posts/PostContainer.js'
 import Post from '../src/Posts/Post.js'
 import NewPostForm from '../src/Posts/NewPostForm.js'
+import EditPostForm from '../src/Posts/EditPost.js'
 import RealMap from '../src/map/RealMap.js'
 
 
@@ -95,6 +96,18 @@ class App extends Component {
     })
   }
 
+  latHandler = (e) => {
+    this.setState({
+      postLatInput: e.target.value
+    })
+  }
+
+  longHandler = (e) => {
+    this.setState({
+      postLongInput: e.target.value
+    })
+  }
+
   fileSelectHandler = (e) => {
     // console.log(e.target.files[0])
     this.setState({
@@ -110,13 +123,45 @@ class App extends Component {
   //   // fetch() post to  backend
   // }
 
-  //will fetch post data to backend
+  //will fetch post newly created data to backend
   submitPostFormHandler = (e) => {
     e.preventDefault();
     // console.log(e)
     // const fileData = new FormData();
     // fileData.append('image', this.state.selectedFile, this.state.selectedFile)
   }
+
+  submitEditHandler = (e) => {
+    e.preventDefault();
+    let editPostId = this.state.currentPost.id
+
+    fetch(`http://localhost:3001/api/v1/bright_spots/${editPostId}`,
+      { method: 'PATCH',
+       headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json"
+                },
+       body: JSON.stringify({
+          name: this.state.postNameInput,
+          description: this.state.postDescrInput
+       })
+      }
+    )
+    .then(response => response.json())
+    .then(updatedBrightSpot =>{
+
+    let copy = this.state.brightSpots.slice();
+    let index = copy.findIndex((spot) => { return spot.id === updatedBrightSpot.id });
+      copy.splice(index, 1, updatedBrightSpot);
+      this.setState({
+        brightSpots: copy
+      });
+      console.log(updatedBrightSpot)
+      console.log(this.state.brightSpots)
+      alert("Your changes have been saved!")
+    })
+  }
+
 
   render() {
     return(
@@ -186,7 +231,20 @@ class App extends Component {
              fileUpload={this.fileUploadHandler}
              inputName={this.nameHandler}
              inputDescription={this.descriptionHandler}
+             inputLatitude={this.latHandler}
+             inputLongitude={this.longHandler}
              submitPostForm={this.submitPostFormHandler}
+            />
+          ) } }
+        />
+
+      <Route exact path="/edit-post" render={()=>{
+          return(
+            <EditPostForm
+             currentPost={this.state.currentPost}
+             inputName={this.nameHandler}
+             inputDescription={this.descriptionHandler}
+             submitEdit={this.submitEditHandler}
             />
           ) } }
         />

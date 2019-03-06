@@ -6,22 +6,32 @@ export class NewPostForm extends React.Component{
     return (
     <div>
       <h1>Add a Bright Spot!</h1>
-      <form>
-        <input id='input-name'
+      <form class='form'>
+        <input class='input'
           type='text'
           placeholder='Name of BrightSpot'
           onChange={this.props.inputName}
         />
-        <input id='input-description'
+      <input class='input'
           type='text'
           placeholder='Description'
           onChange={this.props.inputDescription}
         />
-        <input id='input-photo'
-          type='file'
-          onChange={this.props.fileSelect}
-          />
-//still needs location selector from map
+      <input class='input'
+        type='text'
+        placeholder='Latitude'
+        onChange={this.props.inputLatitude}
+        />
+      <input class='input'
+        type='text'
+        placeholder='Longitude'
+        onChange={this.props.inputLongitude}
+        />
+      <input class='input'
+        type='file'
+        onChange={this.props.fileSelect}
+        />
+
         <button
           onClick={this.props.fileUpload}
           onSubmit={this.props.submitPostForm}
