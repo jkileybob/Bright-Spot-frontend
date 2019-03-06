@@ -21,7 +21,7 @@ export class EditPostForm extends React.Component{
 
         <button type='submit'>Submit</button>
       </form>
-    <Link to={`/bright-spots/${this.props.currentPost.id}`}>go back.</Link>
+    <Link class='link' to={`/bright-spots/${this.props.currentPost.id}`}>go back.</Link>
     </div>
   )}
 }

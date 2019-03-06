@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 const NavBar = (props) => {
   return(
     <div className="NavBar">
-      <Link to="/home">home.</Link>
-      <Link to="/about">about.</Link>
-      <Link to="/map">map.</Link>
-      <Link to="/bright-spots">spots.</Link>
-      <Link to='/new-post'>create.</Link>
+      <Link class='link'to="/home">home.</Link>
+      <Link class='link' to="/about">about.</Link>
+      <Link class='link' to="/map">map.</Link>
+      <Link class='link' to="/bright-spots">spots.</Link>
+      <Link class='link' to='/new-post'>create.</Link>
       <p>sometimes you need a quick</p>
       <h1>BrightSpot</h1>
     </div>

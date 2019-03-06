@@ -7,7 +7,9 @@
   -1px 1px 0 #000,
   1px 1px 0 #000;
 }
-
+.link {
+  color: orange;
+}
 .post {
   display: block;
   text-align: center;
@@ -94,13 +96,18 @@
 }
 
 .input[type=text] {
+  text-align: center;
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
-  border: none;
+  border-color: #00FFFF;
   background-color: #FFA500;
   color: #FF00FF;
   font-family: 'Press Start 2P', cursive;
-
+}
+::placeholder {
+  color: #FF00FF;
+  opacity: 1; /* Firefox */
+  text-align: center;
 }
