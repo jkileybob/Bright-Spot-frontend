@@ -1,4 +1,36 @@
+///////////////////////////local image upload////////////////////////////
 
+// will fetch to post backend
+  fileUploadHandler = (e) => {
+    e.preventDefault();
+    const fileData = new FormData();
+    fileData.append('image', this.state.selectedFile, this.state.selectedFile)
+    //
+    // fetch() post to  backend
+    console.log('photo stuff', fileData)
+  }
+
+// create form:
+  <input class='input'
+    type='file'
+    onChange={this.props.fileSelect}
+    />
+//state:
+selectedFile: null,   //photo upload selector status
+
+// <NewPostForm
+ fileSelect={this.fileSelectHandler}
+ fileUpload={this.fileUploadHandler}
+
+ //handler
+ fileSelectHandler = (e) => {
+   this.setState({
+     selectedFile: e.target.files[0]
+   })
+ }
+
+
+////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////CurrentLocation InfoWindow//////////////////////////////////////////////
 <Marker
   position={this.state.center}
@@ -19,52 +51,24 @@
  : null }
 
 //////////////////////////////////////////////////////////////////////////////
+// Brigth Spot Container:
+import React from 'react'
+import BrightSpot from '/Users/jkileybob/Mod-5-Final-Project/bright-spot-frontend/src/BrightSpot/BrightSpot.js'
 
- <BrightSpot
-   id={`post-${this.props.currentPost.id}`}
-   key={`post-${this.props.currentPost.id}`}
-   post={this.props.currentPost}
- />
+export class BrightSpotContainer extends React.Component {
 
+  render(){
+    return (
+      this.props.currentPost ?
+      <div className='BrightSpotContainer'>
+            <BrightSpot
+              className='bright-spot'
+              key={`bright-spot-${this.props.currentPost.id}`}
+              spot={this.props.currentPost}
+              />
+      </div>
+      : null
+    )}
+}
 
-<Route exact path='/bright-spots' render={()=>{
-    return(
-      <BrightSpotContainer
-        currentPost={this.state.currentPost}
-        />
-    ) } }
-    />
-
-<Route exact path='/bright-spots/:id' render={(props)=>{
-  let spotIDinURL = parseInt(props.match.params.id)
-  let spot = this.state.brightSpots.filter(spot => spot.id === spotIDinURL)
-debugger
-  return(
-    <BrightSpot
-      id={`bright-spot-${this.props.currentPost.id}`}
-      key={`bright-spot-${this.props.currentPost.id}`}
-      currentPost={this.state.currentPost}
-      showModal={this.state.showModal}
-      onClickClose={this.hideModal}
-    />
-    ) } }
-/>
-
-
-<Route exact path='/posts/:id' render={()=>{
-    return(
-
-    ) } }
-  />
-
-
-  <Route exact path='/bright-spots/:id' render={(props)=>{
-      let brightSpotIDinURL = props.match.params.id
-      let spot = this.state.brightSpots.filter(spot => spot.id === brightSpotIDinURL)
-
-      return(
-        <BrightSpotContainer
-         currentPost={this.state.currentPost}
-        />
-      ) } }
-    />
+export default BrightSpotContainer

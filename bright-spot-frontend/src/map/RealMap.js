@@ -42,7 +42,7 @@ export class RealMap extends React.Component {
   onInfoWindowOpen(props, e) {
     const button = (
       <form action={`/bright-spots/${this.props.currentPost.id}`}>
-          <input type="submit" value="show me more." />
+          <input class='button' type="submit" value="show me more." />
       </form>
     );
     ReactDOM.render(

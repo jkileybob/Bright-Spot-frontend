@@ -9,17 +9,19 @@ export class EditPostForm extends React.Component{
       <form class='form' onSubmit={this.props.submitEdit} >
 
         <input class='input'
+          placeholder={this.props.currentPost.name}
           type='text'
-          value={this.props.currentPost.name}
+          value={this.props.name}
           onChange={this.props.inputName}
         />
       <input class='input'
           type='text'
-          value={this.props.currentPost.description}
+          placeholder={this.props.currentPost.description}
+          value={this.props.description}
           onChange={this.props.inputDescription}
         />
 
-        <button type='submit'>Submit</button>
+      <button class='button' type='submit'>Submit</button>
       </form>
     <Link class='link' to={`/bright-spots/${this.props.currentPost.id}`}>go back.</Link>
     </div>

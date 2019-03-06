@@ -5,9 +5,8 @@ import NavBar from '../src/NavBar'
 import Home from '../src/Home'
 import About from '../src/About'
 import BrightSpot from '../src/BrightSpot/BrightSpot'
-import BrightSpotContainer from '../src/BrightSpot/BrightSpotContainer'
-import PostContainer from '../src/Posts/PostContainer.js'
 import Post from '../src/Posts/Post.js'
+import PostContainer from '../src/Posts/PostContainer.js'
 import NewPostForm from '../src/Posts/NewPostForm.js'
 import EditPostForm from '../src/Posts/EditPost.js'
 import RealMap from '../src/map/RealMap.js'
@@ -21,10 +20,11 @@ class App extends Component {
     posts: [],           //all posts
     currentPost: {},     //selected post
     visible: false,      //visibility of infowindow
-    showModal: false,    //visibility of modal
-    selectedFile: null,   //photo upload selector status
-    postNameInput: '',    //controlled form states
-    postDescrInput: ''    //for new post form
+    photoInput: '',
+    postNameInput: '',
+    postDescrInput: '',
+    postLatInput: '',
+    postLongInput: ''
   }
 
 
@@ -53,17 +53,9 @@ class App extends Component {
     this.state.brightSpots.map(spot =>{
       if (spot.id === parseInt(e.currentTarget.id)){
         this.setState({
-          currentPost: spot,
-          showModal: true
+          currentPost: spot
         })
       }
-    })
-  }
-
-  hideModal = (e) => {
-    this.setState({
-      currentPost: {},
-      showModal: false
     })
   }
 
@@ -108,28 +100,62 @@ class App extends Component {
     })
   }
 
-  fileSelectHandler = (e) => {
-    // console.log(e.target.files[0])
+// sets current post to the last element in the bS array, so submit image has acces to specific bS id
+  internetImageHandler = (e) => {
+    let spotArr = this.state.brightSpots
+
     this.setState({
-      selectedFile: e.target.files[0]
+      photoInput: e.target.value,
+      currentPost: spotArr[spotArr.length-1]
     })
   }
 
-  // fileUploadHandler = (e) => {
-  //   e.preventDefault();
-  //   const fileData = new FormData();
-  //   fileData.append('image', this.state.selectedFile, this.state.selectedFile)
-  //
-  //   // fetch() post to  backend
-  // }
-
-  //will fetch post newly created data to backend
-  submitPostFormHandler = (e) => {
-    e.preventDefault();
-    // console.log(e)
-    // const fileData = new FormData();
-    // fileData.append('image', this.state.selectedFile, this.state.selectedFile)
+  //will fetch post newly created data to bS backend
+  submitPostFormHandler = () => {
+    fetch(`http://localhost:3001/api/v1/bright_spots/`,
+      { method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: this.state.postNameInput,
+          description: this.state.postDescrInput,
+          latitude: this.state.postLatInput,
+          longitude: this.state.postLongInput
+        })
+      }
+    )
+    .then(response => response.json())
+    .then(newSpot => {
+      this.state.brightSpots.push(newSpot)
+    })
+    alert("Congrats! Your new Bright Spot has been created! Now submit your image below.")
   }
+
+
+  //submits to posts backend
+  submitInternetImage = () => {
+    fetch(`http://localhost:3001/api/v1/posts/`,
+      { method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          bright_spot_id: this.state.currentPost.id,
+          photo: this.state.photoInput
+        })
+      }
+    )
+    .then(response => response.json())
+    .then(newImg => {
+      this.state.posts.push(newImg)
+    })
+    alert("That oughta do it! Check out your new bright spot!")
+  }
+
+
 
   submitEditHandler = (e) => {
     e.preventDefault();
@@ -156,12 +182,29 @@ class App extends Component {
       this.setState({
         brightSpots: copy
       });
-      console.log(updatedBrightSpot)
-      console.log(this.state.brightSpots)
       alert("Your changes have been saved!")
     })
   }
 
+  // deleteSpot = () => {
+  //     let deleteSpotID = this.state.currentPost.id
+  //
+  //   fetch(`http://localhost:3001/api/v1/bright_spots/${deleteSpotID}`, {
+  //     method: 'DELETE'
+  //   }).then(response => response.json())
+  //   .then(() => `this.state.brightSpots.${deleteSpotID}.remove()`)
+  //
+  //
+  // }
+  //
+  // function deletePokemon(id){
+  //   fetch(`http://localhost:3000/pokemon/${id}`, {
+  //     method: "DELETE"
+  //   }).then(res => res.json())
+  //   .then(() => {
+  //     document.querySelector(`#pokemon-${id}`).remove()
+  //   })
+  // }
 
   render() {
     return(
@@ -218,8 +261,7 @@ class App extends Component {
               id={`bright-spot-${spot.id}`}
               key={`bright-spot-${spot.id}`}
               spot={spot}
-              showModal={this.state.showModal}
-              onClickClose={this.hideModal}
+              delete={this.deleteSpot}
             /> : null
             ) } }
         />
@@ -227,11 +269,16 @@ class App extends Component {
         <Route exact path="/new-post" render={()=>{
           return(
             <NewPostForm
-             fileSelect={this.fileSelectHandler}
-             fileUpload={this.fileUploadHandler}
+             img={this.state.photoInput}
+             inputInternetImage={this.internetImageHandler}
+             submitInternetImage={this.submitInternetImage}
+             name={this.state.postNameInput}
              inputName={this.nameHandler}
+             description={this.state.postDescrInput}
              inputDescription={this.descriptionHandler}
+             lat={this.state.postLatInput}
              inputLatitude={this.latHandler}
+             long={this.state.inputLongitude}
              inputLongitude={this.longHandler}
              submitPostForm={this.submitPostFormHandler}
             />
@@ -242,7 +289,9 @@ class App extends Component {
           return(
             <EditPostForm
              currentPost={this.state.currentPost}
+             name={this.state.postNameInput}
              inputName={this.nameHandler}
+             description={this.state.postDescrInput}
              inputDescription={this.descriptionHandler}
              submitEdit={this.submitEditHandler}
             />
