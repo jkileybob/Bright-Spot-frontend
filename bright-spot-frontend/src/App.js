@@ -186,25 +186,21 @@ class App extends Component {
     })
   }
 
-  // deleteSpot = () => {
-  //     let deleteSpotID = this.state.currentPost.id
-  //
-  //   fetch(`http://localhost:3001/api/v1/bright_spots/${deleteSpotID}`, {
-  //     method: 'DELETE'
-  //   }).then(response => response.json())
-  //   .then(() => `this.state.brightSpots.${deleteSpotID}.remove()`)
-  //
-  //
-  // }
-  //
-  // function deletePokemon(id){
-  //   fetch(`http://localhost:3000/pokemon/${id}`, {
-  //     method: "DELETE"
-  //   }).then(res => res.json())
-  //   .then(() => {
-  //     document.querySelector(`#pokemon-${id}`).remove()
-  //   })
-  // }
+  deleteSpot = () => {
+    console.log('attempting to delete:', this.state.currentPost)
+      let id = this.state.currentPost.id
+
+    fetch(`http://localhost:3001/api/v1/bright_spots/${id}`, {
+      method: 'DELETE'
+    }).then(response => response.json())
+    .then(() => `this.state.brightSpots.${id}.remove()`)
+
+    fetch(`http://localhost:3001/api/v1/posts/${id}`, {
+      method: 'DELETE'
+    }).then(response => response.json())
+    .then(() => `this.state.posts.${id}.remove()`)
+
+  }
 
   render() {
     return(
