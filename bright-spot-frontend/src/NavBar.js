@@ -10,7 +10,7 @@ const NavBar = (props) => {
       <Link class='link' to="/bright-spots">spots.</Link>
       <Link class='link' to='/new-post'>create.</Link>
       <p>sometimes you need a quick</p>
-      <h1>BrightSpot</h1>
+      <h1 class='logo'>BrightSpot</h1>
     </div>
   )
 }

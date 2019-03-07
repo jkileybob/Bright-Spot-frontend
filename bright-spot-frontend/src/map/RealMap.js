@@ -42,7 +42,7 @@ export class RealMap extends React.Component {
   onInfoWindowOpen(props, e) {
     const button = (
       <form action={`/bright-spots/${this.props.currentPost.id}`}>
-          <input class='button' type="submit" value="show me more." />
+          <button class='btn' type="submit">show me more.</button>
       </form>
     );
     ReactDOM.render(
@@ -189,8 +189,8 @@ export class RealMap extends React.Component {
               }}
                 >
                   <div>
-                    <h1>{this.props.currentPost.name}</h1>
-                    <p>{this.props.currentPost.description}</p>
+                    <h1 class='iw'>{this.props.currentPost.name}</h1>
+                    <h3 class='iw'>{this.props.currentPost.description}</h3>
                   </div>
                   <div id="iwc" />
             </InfoWindow>

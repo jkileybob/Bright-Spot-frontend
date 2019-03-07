@@ -11,7 +11,7 @@ const BrightSpot = (props) => {
       <h3 key={`bright-spot-description-${props.spot.id}`}>{props.spot.description}</h3>
       <img src={`${props.spot.posts[0].photo}`}/>
 
-      <button onClick={props.delete}>This Bright Spot is no longer relevant.</button>
+      <button class='btn' onClick={props.delete}>This Bright Spot is no longer relevant.</button>
 
     </div>
   )

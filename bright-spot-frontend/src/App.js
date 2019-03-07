@@ -16,10 +16,10 @@ class App extends Component {
 
   // STATE:
   state = {
-    brightSpots: [],     //all spots
-    posts: [],           //all posts
-    currentPost: {},     //selected post
-    visible: false,      //visibility of infowindow
+    brightSpots: [],
+    posts: [],
+    currentPost: {},
+    visible: false,
     photoInput: '',
     postNameInput: '',
     postDescrInput: '',
@@ -43,70 +43,6 @@ class App extends Component {
       this.setState({
         posts: posts
       })
-    })
-  }
-
-
-// POST CLICKS:
-  onPostClickHandler = (e) => {
-    // console.log(e.currentTarget);
-    this.state.brightSpots.map(spot =>{
-      if (spot.id === parseInt(e.currentTarget.id)){
-        this.setState({
-          currentPost: spot
-        })
-      }
-    })
-  }
-
-
-// MAP CLICKS:
-  onMarkerClickHandler = (e) => {
-    // console.log(e.spot)
-    this.setState({
-      currentPost: e.spot,
-      visible: true
-    })
-  }
-
-  onCloseIWHandler = (e) => {
-    this.setState({
-      visible: false
-    })
-  }
-
-
-  // FORM CLICKS:
-  nameHandler = (e) => {
-    this.setState({
-      postNameInput: e.target.value
-    })
-  }
-  descriptionHandler = (e) => {
-    this.setState({
-      postDescrInput: e.target.value
-    })
-  }
-
-  latHandler = (e) => {
-    this.setState({
-      postLatInput: e.target.value
-    })
-  }
-
-  longHandler = (e) => {
-    this.setState({
-      postLongInput: e.target.value
-    })
-  }
-
-// sets current post to the last element in the bS array, so submit image has acces to specific bS id
-  internetImageHandler = (e) => {
-    let spotArr = this.state.brightSpots
-
-    this.setState({
-      photoInput: e.target.value,
-      currentPost: spotArr[spotArr.length-1]
     })
   }
 
@@ -156,7 +92,6 @@ class App extends Component {
   }
 
 
-
   submitEditHandler = (e) => {
     e.preventDefault();
     let editPostId = this.state.currentPost.id
@@ -188,7 +123,7 @@ class App extends Component {
 
   deleteSpot = () => {
     console.log('attempting to delete:', this.state.currentPost)
-      let id = this.state.currentPost.id
+    let id = this.state.currentPost.id
 
     fetch(`http://localhost:3001/api/v1/bright_spots/${id}`, {
       method: 'DELETE'
@@ -199,8 +134,69 @@ class App extends Component {
       method: 'DELETE'
     }).then(response => response.json())
     .then(() => `this.state.posts.${id}.remove()`)
-
+    alert("this spot no longer exits...")
   }
+
+// POST CLICKS:
+  onPostClickHandler = (e) => {
+    // console.log(e.currentTarget);
+    this.state.brightSpots.map(spot =>{
+      if (spot.id === parseInt(e.currentTarget.id)){
+        this.setState({
+          currentPost: spot
+        })
+      }
+    })
+  }
+
+
+// MAP CLICKS:
+  onMarkerClickHandler = (e) => {
+    // console.log(e.spot)
+    this.setState({
+      currentPost: e.spot,
+      visible: true
+    })
+  }
+
+  onCloseIWHandler = (e) => {
+    this.setState({
+      visible: false
+    })
+  }
+
+  // FORM CLICKS:
+  nameHandler = (e) => {
+    this.setState({
+      postNameInput: e.target.value
+    })
+  }
+  descriptionHandler = (e) => {
+    this.setState({
+      postDescrInput: e.target.value
+    })
+  }
+
+  latHandler = (e) => {
+    this.setState({
+      postLatInput: e.target.value
+    })
+  }
+
+  longHandler = (e) => {
+    this.setState({
+      postLongInput: e.target.value
+    })
+  }
+
+  internetImageHandler = (e) => {
+    let spotArr = this.state.brightSpots
+    this.setState({
+      photoInput: e.target.value,
+      currentPost: spotArr[spotArr.length-1]
+    })
+  }
+
 
   render() {
     return(

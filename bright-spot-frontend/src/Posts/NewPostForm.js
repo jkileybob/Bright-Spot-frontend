@@ -41,7 +41,7 @@ export class NewPostForm extends React.Component{
         onChange={this.props.inputLongitude}
         />
 
-      <button class='button' type='submit'>Submit</button>
+      <button class='btn' type='submit'>Submit</button>
       </form>
 
       <input class='input'
@@ -50,7 +50,7 @@ export class NewPostForm extends React.Component{
         value={this.props.img}
         onChange={this.props.inputInternetImage}
         />
-      <button class='button' type='submit' onClick={this.props.submitInternetImage}>Submit</button>
+      <button class='btn' type='submit' onClick={this.props.submitInternetImage}>Submit</button>
 
     </div>
   )}
