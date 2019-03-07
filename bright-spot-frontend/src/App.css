@@ -107,6 +107,11 @@
     padding:8px;
     border:4px solid orange;
     background-color:#00FFFF;
+    opacity: 0.9;
+}
+
+.img:hover {
+  opacity: 1.0; /* 1 = 100%, 0 = 0% */
 }
 
 .map {

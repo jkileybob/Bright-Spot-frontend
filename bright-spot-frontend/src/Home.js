@@ -22,7 +22,7 @@ const Home = (props) => {
         <img src="http://gif-finder.com/wp-content/uploads/2016/03/Happiness-has-a-face.gif" />
         <img src="http://gif-finder.com/wp-content/uploads/2016/03/Happiness-has-a-face.gif" />
       </div>
-      
+
     </div>
 
   )
